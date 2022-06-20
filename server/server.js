@@ -24,9 +24,12 @@ const io = socket(server, {
 io.on('connection', socket => {
   // client joins
   console.log(`socket id: ${socket.id}`)
+  console.log(`${socket.conn.server.clientsCount} clients are connected`)
 
   // adoption event
   socket.on('adopt', data => {
+    console.log('a pet was adopted')
+    console.log(`${socket.conn.server.clientsCount} clients are connected`)
     socket.broadcast.emit('adopt', data)
   })
 })
