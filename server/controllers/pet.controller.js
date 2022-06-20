@@ -39,6 +39,7 @@ module.exports.readOnePet = (request, response) => {
 module.exports.updatePet = async(request, response) => {
   // check that pet name is unique (except for one with same id)
   try {
+    console.log('update req received')
     const pets = await Pet.find({name: request.body.name})
     if (pets.length===1 && pets[0]._id!=request.body._id) return response.status(400).json( {errors: {name: {message: 'Pet name already taken'}}})
     const pet = await Pet.findOneAndUpdate({_id: request.params._id}, request.body, {new: true, runValidators: true})
@@ -51,5 +52,11 @@ module.exports.updatePet = async(request, response) => {
 module.exports.deletePet = (request, response) => {
   Pet.deleteOne({_id: request.params._id})
     .then(deleteConfirmation => response.json(deleteConfirmation))
+    .catch(err => response.status(400).json(err))
+}
+
+module.exports.likePet = (request, response) => {
+  Pet.findOneAndUpdate({_id: request.params._id}, {$set: request.body}, {new: true})
+    .then(pet => response.json(pet))
     .catch(err => response.status(400).json(err))
 }

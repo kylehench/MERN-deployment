@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-const Pet = (props) => {
+const Pet = () => {
   const { id } = useParams()
   const [pet, setPet] = useState({})
 

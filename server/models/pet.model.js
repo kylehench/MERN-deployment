@@ -18,6 +18,10 @@ const PetSchema = new mongoose.Schema({
     min: [0, "Must have at least 0 skills"],
     max: [3, "Must not have more than 3 skills"]
   },
+  likeCount: {
+    type: Number,
+    default: 0
+  },
 }, { timestamps: true })
 
 module.exports = mongoose.model('Pet', PetSchema)

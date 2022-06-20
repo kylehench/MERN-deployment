@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import DeleteButton from './DeleteButton'
+import Like from './Like'
+import io from 'socket.io-client'
 
 const Pets = (props) => {
   const { pets, setPets } = props
@@ -27,6 +29,7 @@ const Pets = (props) => {
             <th>Type</th>
             <th>Description</th>
             <th>Number of Skills</th>
+            <th>Likes</th>
             <th style={{width: '190px'}}>Actions</th>
           </tr>
           { pets
@@ -37,6 +40,7 @@ const Pets = (props) => {
               <td className='py-2'>{pet.type}</td>
               <td className='py-2'>{pet.description}</td>
               <td className='py-2'>{pet.skillCount}</td>
+              <Like pet={pet} />
               <td className='py-2'>
                 <button className='btn btn-sm btn-secondary me-2'>
                   <Link to={`/${pet._id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>View</Link>

@@ -4,9 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import PetForm from './PetForm'
 import DeleteButton from './DeleteButton'
 
-const Update = (props) => {
-  const { pets, setPets } = props
-  // const emptyPet = {name: '', type: '', description: '', skillCount: 0}
+const Update = () => {
   const [pet, setPet] = useState({})
   const [validationErrors, setValidationErrors] = useState({})
   const [loaded, setLoaded] = useState(false)
