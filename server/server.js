@@ -14,7 +14,7 @@ const server = app.listen(port, () => console.log(`Listening on port: ${port}`))
 
 const io = socket(server, {
   cors: {
-    origin: 'http://54.234.214.134/',
+    origin: '*',
     // origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
     allowedHeaders: ['*'],
