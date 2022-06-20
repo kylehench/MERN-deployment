@@ -2,28 +2,29 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-const Product = (props) => {
+const Pet = (props) => {
   const { id } = useParams()
-  const [product, setProduct] = useState({})
+  const [pet, setPet] = useState({})
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/products/${id}`)
+    axios.get(`http://localhost:8000/api/pets/${id}`)
     .then(res => {
       console.log(res.data)
-      setProduct(res.data)
+      setPet(res.data)
     })
     .catch(err => console.log(err))
   }, [])
 
   return (
     <div className='container mt-3'>
-      <h2>{product.title}</h2>
+      <h2>{pet.name}</h2>
       <p>
-        Price: ${product.price} <br />
-        Description: {product.description}
+        <b>Type:</b> {pet.type}<br />
+        <b>Description:</b> {pet.description}<br />
+        <b>Number of Skills:</b> {pet.skillCount}
       </p>
     </div>
   )
 }
 
-export default Product
+export default Pet

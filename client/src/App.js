@@ -2,8 +2,8 @@ import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './views/Main';
-import Product from './views/Product';
-import Update from './components/Update';
+import Pet from './views/Pet';
+import PetUpdate from './components/PetUpdate';
 
 
 function App() {
@@ -11,10 +11,10 @@ function App() {
     <div>
       <BrowserRouter>
       <Routes>
-        <Route element={<Main />} path="" />
+        <Route element={<Main />} path="/" />
         <Route element={<Main />} path="/home" />
-        <Route element={<Product />} path="/:id" />
-        <Route element={<Update />} path="products/edit/:id" />
+        <Route element={<Pet />} path="/:id" />
+        <Route element={<PetUpdate />} path="pets/edit/:id" />
       </Routes>
       </BrowserRouter>
       

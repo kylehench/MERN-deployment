@@ -4,8 +4,9 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }));   // This is new and allows JSON Objects with strings and arrays
+app.use(express.urlencoded({ extended: true }))
+
 require('./config/mongoose.config')
-require('./routes/product.routes')(app)
+require('./routes/pet.routes')(app)
 const port = 8000
 app.listen(port, () => console.log(`Listening on port: ${port}`) )
