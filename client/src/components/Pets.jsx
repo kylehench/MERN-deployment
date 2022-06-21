@@ -7,7 +7,8 @@ import io from 'socket.io-client'
 
 const Pets = (props) => {
   const { pets, setPets } = props
-  const [socket] = useState(() => io(':8000'))
+  const [socket] = useState(() => io('/'))
+  // const [socket] = useState(() => io(':8000'))
 
   useEffect(() => {
     axios.get('http://localhost:8000/api/pets')
