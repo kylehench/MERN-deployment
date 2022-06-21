@@ -3,12 +3,9 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import DeleteButton from './DeleteButton'
 import Like from './Like'
-import io from 'socket.io-client'
 
 const Pets = (props) => {
-  const { pets, setPets } = props
-  const [socket] = useState(() => io(':80'))
-  // const [socket] = useState(() => io(':8000'))
+  const { pets, setPets, socket } = props
 
   useEffect(() => {
     axios.get('http://localhost:8000/api/pets')
@@ -35,16 +32,17 @@ const Pets = (props) => {
 
   return (
     <div>
-      <h2>Pets</h2>
+      <div className='d-flex justify-content-between'>
+        <h1>Pet Shelter</h1>
+        <Link to={`/pets/new/`}>add a pet to the shelter</Link>
+      </div>
+      <h4 className='my-3'>These pets are looking for a good home</h4>
       <table className='table table-hover'>
         <tbody>
           <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>Description</th>
-            <th>Number of Skills</th>
-            <th>Likes</th>
-            <th style={{width: '190px'}}>Actions</th>
+            <th >Actions</th>
           </tr>
           { pets
             .sort((a, b) => a.type.toLowerCase() > b.type.toLowerCase() ? 1:-1)
@@ -52,24 +50,22 @@ const Pets = (props) => {
             <tr key={pet._id}>
               <td>{pet.name}</td>
               <td>{pet.type}</td>
-              <td>{pet.description}</td>
-              <td>{pet.skillCount}</td>
-              <td><Like pet={pet} id={pet._id} /></td>
               <td>
                 <button className='btn btn-sm btn-secondary me-2'>
-                  <Link to={`/${pet._id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>View</Link>
+                  <Link to={`/pets/${pet._id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>View</Link>
                 </button>
                 {/* &nbsp;|&nbsp; */}
                 <button className='btn btn-sm btn-secondary me-2'>
-                  <Link to={`/pets/edit/${pet._id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}>Edit</Link>
+                  <Link to={`/pets/${pet._id}/edit`} style={{ color: 'inherit', textDecoration: 'inherit'}}>Edit</Link>
                 </button>
                 {/* &nbsp;|&nbsp; */}
                 <DeleteButton
-                  petId={pet._id}
+                  pet={pet}
                   successCallback={() => {
                     removeFromDom(pet._id)
                     socket.emit('adopt', {_id: pet._id})
                   }}
+                  hideName={true}
                 />
               </td>
             </tr>

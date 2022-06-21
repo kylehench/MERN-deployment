@@ -13,10 +13,9 @@ const PetSchema = new mongoose.Schema({
     type: String,
     minlength: [3, "Description must be 3 characters or longer"]
   },
-  skillCount: {
-    type: Number,
-    min: [0, "Must have at least 0 skills"],
-    max: [3, "Must not have more than 3 skills"]
+  skills: {
+    type: [String],
+    default: []
   },
   likeCount: {
     type: Number,

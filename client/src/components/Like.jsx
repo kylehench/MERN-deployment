@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 const Like = (props) => {
-  const [pet, setPet] = useState(props.pet)
+  const { pet, setPet } = props
   const [ likeStatus, setLikeStatus ] = useState(false)
 
   const clickHandler = () => {
@@ -17,8 +17,8 @@ const Like = (props) => {
   
   return (
     <div className='d-flex'>
-      <div className="d-flex justify-content-center" style={{width: '45px'}}>
-        <div className='me-2 p-1 text text-primary border d-flex justify-content-center' style={{borderRadius: '50%', minWidth: '33px'}}><b>{pet.likeCount}</b></div>
+      <div className="d-flex justify-content-center">
+        <div className='me-2 py-1 px-2 text text-primary border d-flex justify-content-center' style={{borderRadius: '20px', minWidth: '33px'}}><b>{pet.likeCount} like{pet.likeCount!==1 && <>s</>}</b></div>
       </div>
       <button 
         className={`btn btn-sm ${!likeStatus ? 'btn-primary' : 'btn-outline-primary disabled shadow-none'}`}

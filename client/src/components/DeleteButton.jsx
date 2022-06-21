@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 const DeleteButton = (props) => {
-  const { petId, successCallback } = props
+  const { pet, successCallback, hideName } = props
   
   const deletePet = petId => {
     axios.delete(`http://localhost:8000/api/pets/${petId}`)
@@ -11,7 +11,7 @@ const DeleteButton = (props) => {
   }
   
   return (
-    <button onClick={e => deletePet(petId)} className='btn btn-sm btn-warning'>Adopt</button>
+    <button onClick={e => deletePet(pet._id)} className='btn btn-sm btn-warning'>Adopt {hideName===undefined && pet.name}</button>
   )
 }
 
