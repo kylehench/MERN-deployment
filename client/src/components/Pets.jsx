@@ -24,6 +24,9 @@ const Pets = (props) => {
       console.log(data)
       removeFromDom(data._id)
     })
+    socket.on('hello', data => {
+      console.log(`From socket.io: ${data.msg}`)
+    })
   }, [])
 
   const removeFromDom = _id => {

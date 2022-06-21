@@ -26,6 +26,7 @@ io.on('connection', socket => {
   // client joins
   console.log(`socket id: ${socket.id}`)
   console.log(`${socket.conn.server.clientsCount} clients are connected`)
+  socket.emit('hello', {msg: 'Hello from server.'})
 
   // adoption event
   socket.on('adopt', data => {
