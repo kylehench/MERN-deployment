@@ -10,7 +10,6 @@ const Pet = (props) => {
   const [pet, setPet] = useState({})
   const [loaded, setLoaded] = useState(false)
   const navigate = useNavigate()
-  // const [socket] = useState(() => io(':8000'))
 
   useEffect(() => {
     axios.get(`http://localhost:8000/api/pets/${id}`)
