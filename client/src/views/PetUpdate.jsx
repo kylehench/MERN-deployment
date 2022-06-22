@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import PetForm from '../components/PetForm'
@@ -6,6 +6,8 @@ import PetForm from '../components/PetForm'
 const Update = (props) => {
   const { socket } = props
   const [pet, setPet] = useState({})
+  const petRef = useRef({})
+  petRef.current = pet
   const [initialName, setInitialName] = useState('')
   const [validationErrors, setValidationErrors] = useState({})
   const [loaded, setLoaded] = useState(false)
@@ -29,8 +31,6 @@ const Update = (props) => {
     tmpPet.skills = tmpPet.skills.filter(skill => skill !== '')
     axios.put(`http://localhost:8000/api/pets/${id}`, tmpPet)
       .then( res => {
-        console.log(res)
-        console.log(res.data)
         setValidationErrors({})
         navigate('/')
       })
@@ -40,9 +40,9 @@ const Update = (props) => {
   useEffect(() => {
     socket.on('adopt', data => {
       console.log('adoption event')
-      if (data._id===pet._id) navigate('/')
+      if (data._id===petRef.current._id) navigate('/')
     })
-  }, [pet])
+  }, [])
 
   return (
     <div className='container mt-3'>

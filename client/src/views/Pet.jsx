@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Like from '../components/Like'
@@ -8,13 +8,14 @@ const Pet = (props) => {
   const { socket } = props
   const { id } = useParams()
   const [pet, setPet] = useState({})
+  const petRef = useRef({})
+  petRef.current = pet
   const [loaded, setLoaded] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     axios.get(`http://localhost:8000/api/pets/${id}`)
     .then(res => {
-      console.log(res.data)
       setPet(res.data)
       setLoaded(true)
     })
@@ -24,9 +25,9 @@ const Pet = (props) => {
   useEffect(() => {
     socket.on('adopt', data => {
       console.log('adoption event')
-      if (data._id===pet._id) navigate('/')
+      if (data._id===petRef.current._id) navigate('/')
     })
-  }, [pet])
+  }, [])
 
   const deleteSuccess = () => {
     socket.emit('adopt', {_id: pet._id})
@@ -48,7 +49,7 @@ const Pet = (props) => {
         </div>
         <div className='card p-3'>
           <div>
-            <table borderCollapse='collapse'>
+            <table>
               <tbody>
                 <tr>
                   <td className='pb-3 pe-3' valign='top'><b>Type:</b></td>

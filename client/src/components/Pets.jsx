@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import DeleteButton from './DeleteButton'
-import Like from './Like'
 
 const Pets = (props) => {
   const { pets, setPets, socket } = props
@@ -10,7 +9,6 @@ const Pets = (props) => {
   useEffect(() => {
     axios.get('http://localhost:8000/api/pets')
       .then(res => {
-        console.log(res.data)
         setPets(res.data)
       })
       .catch(err => console.log(err))
@@ -18,7 +16,7 @@ const Pets = (props) => {
 
   useEffect(() => {
     socket.on('adopt', data => {
-      console.log(data)
+      console.log('adoption event')
       removeFromDom(data._id)
     })
     socket.on('hello', data => {

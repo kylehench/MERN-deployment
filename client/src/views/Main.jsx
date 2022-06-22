@@ -7,7 +7,6 @@ const Main = (props) => {
 
   return (
     <div className="container mt-3">
-      <span>{props.testProp}</span>
       <Pets pets={pets} setPets={setPets} socket={socket} />
     </div>
   )

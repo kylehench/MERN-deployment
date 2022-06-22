@@ -3,7 +3,7 @@ import PetForm from '../components/PetForm';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Main = (props) => {
+const Main = () => {
   const [newPet, setNewPet] = useState({name: '', type: '', description: '', skills: ['','','']})
   const [validationErrors, setValidationErrors] = useState({})
   const navigate = useNavigate()
@@ -13,8 +13,6 @@ const Main = (props) => {
     tmpPet.skills = tmpPet.skills.filter(skill => skill !== '')    
     axios.post('http://localhost:8000/api/pets', tmpPet)
       .then( res => {
-        console.log(res)
-        console.log(res.data)
         setValidationErrors({})
         navigate('/')
       })

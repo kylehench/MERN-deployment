@@ -8,7 +8,6 @@ const Like = (props) => {
   const clickHandler = () => {
     axios.post(`http://localhost:8000/api/pets/${pet._id}/like`, {likeCount: pet.likeCount+1})
       .then(res => {
-        console.log(res.data)
         setPet({...pet, likeCount: pet.likeCount+1})
         setLikeStatus(true)
       })
